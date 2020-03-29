@@ -31,7 +31,7 @@
         for(let i = 0; i < 5; i++) {
             let playerSelection = prompt("Player, make your move:");
             
-            if(!choices.contains(playerSelection)){
+            if(!choices.includes(playerSelection)){
                 console.log("Bad Choice! Please only select Rock, Paper or Scissors!");
                 i--;
                 break;
