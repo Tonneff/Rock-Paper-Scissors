@@ -1,0 +1,70 @@
+<script>
+    const choices = ["rock", "paper", "scissors"];
+    
+    function computerPlay() {
+        let i = Math.floor(Math.random()*3);
+
+        return choices[i];
+    }
+
+    function playRound(playerSelection, computerSelection) {
+        if((playerSelection.toLowerCase().match("rock") && computerSelection.toLowerCase().match("paper")) ||
+            playerSelection.toLowerCase().match("paper") && computerSelection.toLowerCase().match("scissors") ||
+            playerSelection.toLowerCase().match("scissors") && computerSelection.toLowerCase().match("rock"))
+                return -1;
+        if((playerSelection.toLowerCase().match("rock") && computerSelection.toLowerCase().match("scissors")) ||
+            (playerSelection.toLowerCase().match("paper") && computerSelection.toLowerCase().match("rock")) ||
+            (playerSelection.toLowerCase().match("scissors") && computerSelection.toLowerCase().match("paper")))
+                return 1;
+        if(playerSelection.toLowerCase().localeCompare(computerSelection.toLowerCase()) == 0)
+                return 0;
+    }
+
+    function game() {
+        var playerScore = 0;
+        var computerScore = 0;
+
+        for(let i = 0; i < 5; i++) {
+            let playerSelection = prompt("Player, make your move:");
+            
+            if(!choices.contains(playerSelection)){
+                console.log("Bad Choice! Please only select Rock, Paper or Scissors!");
+                i--;
+                break;
+            }
+            
+            let computerSelection = computerPlay();
+
+            let roundResult = playRound(playerSelection, computerSelection);
+
+            if(roundResult == 0){
+                console.log("Round ${i + 1} - It's a Draw!");
+            }
+
+            if(roundResult == 1) {
+                console.log("Round ${i + 1} - Player Wins!");
+                playerScore++;
+            }
+
+            if(roundResult == -1){
+                console.log("Round ${i + 1} - Computer Wins!");
+                computerScore++;
+            }
+        }
+        
+        if(playerScore > computerScore) {
+            console.log("Player Score: ${playerScore}\n");
+            console.log("Computer Score ${computerScore}\n");
+            console.log("Player Wins!");
+        } else if(computerScore < playerScore){
+            console.log("Player Score: ${playerScore}\n");
+            console.log("Computer Score ${computerScore}\n");
+            console.log("Computer Wins!");
+        } else {
+            console.log("Player Score: ${playerScore}\n");
+            console.log("Computer Score ${computerScore}\n");
+            console.log("It's a Draw!");
+        }
+
+    }
+</script>
